@@ -1,6 +1,6 @@
 
 
-class Schdedule:
+class Schedule:
 
     # Attributes:
     id: int
@@ -10,17 +10,21 @@ class Schdedule:
 
 
 
-    def __init__(self, schedule_id: int, name: str, description: str, start_date: str, end_date: str):
-        self.schedule_id = schedule_id
-        self.name = name
-        self.description = description
-        self.start_date = start_date
+    _id_counter = 1
 
+    def __init__(self, class_id, day):
+        self.id = Schedule._id_counter
+        Schedule._id_counter += 1
+
+        self.class_id = class_id
+        self.day = day
+        self.lessons = {}
 
     def add_lesson(self, time, subject, teacher_id):
         if time in self.lessons:
             raise ValueError(f"Conflict: Lesson already scheduled at {time}")
-        self.lessons[time] = {
+        else:
+            self.lessons[time] = {
             "subject": subject,
             "teacher_id": teacher_id
         }
