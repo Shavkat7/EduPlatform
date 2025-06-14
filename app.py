@@ -126,4 +126,4 @@ def Parent_menu():
 
 menu()
 
-p1 = Parent("Shavkat Sadulloyev", "skdhb@gmail.com", "qwerty", )
+p1 = Parent()

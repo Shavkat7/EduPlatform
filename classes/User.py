@@ -26,3 +26,21 @@ class User(AbstractRole):
                 print(f"Notification {notification_id} deleted.")
                 return
         print("Notification ID is invalid!")
+
+
+    def get_profile(self):
+            return {
+                "ID": self._id,
+                "Name": self._full_name,
+                "Email": self._email,
+                "Role": self.role.value,
+                "Created At": self._created_at
+            }
+
+    def update_profile(self, full_name=None, email=None, password=None):
+        if full_name:
+            self._full_name = full_name
+        if email:
+            self._email = email
+        if password:
+            self._password_hash = self._hash_password(password)

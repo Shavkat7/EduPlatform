@@ -1,4 +1,4 @@
-from classes.User import User
+from classes.User import User, UserRole
 
 class Student(User):
 
@@ -9,8 +9,8 @@ class Student(User):
     grades: dict # Key: subject name, Value: list of grades
 
     # Methods specific to Student
-    def __init__(self, id: int, full_name: str, email: str, password_hash: str, created_at: str, role: str, grade: str):
-        super().__init__(id, full_name, email, password_hash, created_at, role)
+    def __init__(self, full_name: str, email: str, password_hash: str, grade: str):
+        super().__init__(full_name, email, password_hash, UserRole.STUDENT)
         self.grade = grade
         self.subjects = {}
         self.assignments = {}
