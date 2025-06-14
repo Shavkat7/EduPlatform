@@ -1,30 +1,28 @@
-class AbstractRole:
-    # Attributes common to all roles
-    id: int
-    full_name: str
-    email: str
-    password_hash: str
-    created_at: str # ISO format
+import hashlib
+import datetime
+from abc import ABC, abstractmethod
 
-    # Methods common to all roles
-    def __init__(self, id: int, full_name: str, email: str, password_hash: str, created_at: str):
-        self.id = id
-        self.full_name = full_name
-        self.email = email
-        self.password_hash = password_hash
-        self.created_at = created_at
-    
+
+# Abstract Base Class
+class AbstractRole(ABC):
+    _id_counter = 1
+
+    def __init__(self, full_name, email, password):
+        self._id = AbstractRole._id_counter
+        AbstractRole._id_counter += 1
+
+        self._full_name = full_name
+        self._email = email
+        self._password_hash = self._hash_password(password)
+        self._created_at = datetime.datetime.now().isoformat()
+
+    def _hash_password(self, password):
+        return hashlib.sha256(password.encode()).hexdigest()
+
+    @abstractmethod
     def get_profile(self):
-        return {
-            "id": self.id,
-            "full_name": self.full_name,
-            "email": self.email,
-            "created_at": self.created_at
-        }
-    
-    def update_profile(self, full_name: str = None, email: str = None):
-        if full_name:
-            self.full_name = full_name
-        if email:
-            self.email = email
-        return self.get_profile()
+        pass
+
+    @abstractmethod
+    def update_profile(self, full_name=None, email=None, password=None):
+        pass

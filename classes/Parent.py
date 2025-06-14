@@ -6,8 +6,8 @@ class Parent(User):
     children: list  # List of Student IDs
 
     # Methods specific to Parent
-    def __init__(self, id: int, full_name: str, email: str, password_hash: str, created_at: str, role: str):
-        super().__init__(id, full_name, email, password_hash, created_at, role)
+    def __init__(self, full_name: str, email: str, password_hash: str, created_at: str, role: str):
+        super().__init__(full_name, email, password_hash, created_at, role)
         self.children = []
 
     def view_child_grades(self, child_id):

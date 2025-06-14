@@ -12,4 +12,9 @@ les['time2'] = {
 
 del les['time']
 
-print(les)
+# print(les)
+
+
+li = ["324", 1, "3456", "sfssd"]
+li.append(12)
+print(li)

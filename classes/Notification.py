@@ -17,7 +17,7 @@ class Notification:
         self.created_at = created_at
 
 
-    def send(self):
+    def send(self, message, recipient_id):
         # Logic to send the notification
         print(f"Notification sent to {self.recipient_id}: {self.message} at {self.created_at}")
         return True

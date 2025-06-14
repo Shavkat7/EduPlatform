@@ -125,3 +125,5 @@ def Parent_menu():
         case 3: Parent.receive_child_notification()
 
 menu()
+
+p1 = Parent("Shavkat Sadulloyev", "skdhb@gmail.com", "qwerty", )

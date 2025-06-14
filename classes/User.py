@@ -8,24 +8,21 @@ class UserRole(Enum):
     PARENT = "parent"
 
 class User(AbstractRole):
-
-    # Attributes specific to User
-    role: UserRole
-    notifications: list
-
-    def __init__(self, id: int, full_name: str, email: str, password_hash: str, created_at: str, role: UserRole):
-        super().__init__(id, full_name, email, password_hash, created_at)
+    def __init__(self, full_name, email, password, role):
+        super().__init__(full_name, email, password)
         self.role = role
-        self.notifications = []
+        self._notifications = []
 
-    def add_notification(self, notification: str):
-        self.notifications.append(notification)
+    def add_notification(self, notification):
+        self._notifications.append(notification)
 
     def view_notifications(self):
-        return self.notifications
-    
-    def delete_notification(self, notification: str):
-        if notification in self.notifications:
-            self.notifications.remove(notification)
-            return True
-        return False
+        return [{"ID": n.id, "Message": n.message, "Priority": n.priority, "Is Read": n.is_read} for n in self._notifications]
+
+    def delete_notification(self, notification_id):
+        for notification in self._notifications:
+            if notification.id == notification_id:
+                self._notifications.remove(notification)
+                print(f"Notification {notification_id} deleted.")
+                return
+        print("Notification ID is invalid!")
