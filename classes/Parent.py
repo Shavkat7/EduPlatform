@@ -1,46 +1,32 @@
-from classes.User import User
-
+from classes.User import User, UserRole
+import All_Users_Data
 class Parent(User):
 
     # Attributes specific to Parent
     children: list  # List of Student IDs
 
     # Methods specific to Parent
-    def __init__(self, full_name: str, email: str, password_hash: str, created_at: str, role: str):
-        super().__init__(full_name, email, password_hash, created_at, role)
+    def __init__(self, full_name, email, password):
+        super().__init__(full_name, email, password, UserRole.PARENT)
         self.children = []
 
     def view_child_grades(self, child_id):
-        child = self.get_child_by_id(child_id)
+        child = All_Users_Data.students.get(child_id)
         if child:
-            return child.grades
+            return child.view_grades()
         else:
-            raise ValueError("Child ID does not exist.")
+            print("Child not found.")
 
     def view_child_assignments(self, child_id):
-        child = self.get_child_by_id(child_id)
+        child = All_Users_Data.students.get(child_id)
         if child:
             return child.assignments
         else:
-            raise ValueError("Child ID does not exist.")
-
+            print("Child not found.")
 
     def receive_child_notification(self, child_id):
-        child = self.get_child_by_id(child_id)
+        child = All_Users_Data.students.get(child_id)
         if child:
             return child.view_notifications()
         else:
-            raise ValueError("Child ID does not exist.")
-
-
-
-
-
-
-
-
-    def get_child_by_id(self, child_id):
-        for child in self.children:
-            if child.id == child_id:
-                return child
-        return None
+            print("Child not found.")
