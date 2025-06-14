@@ -11,21 +11,21 @@ class Parent(User):
         self.children = []
 
     def view_child_grades(self, child_id):
-        child = All_Users_Data.students.get(child_id)
+        child = All_Users_Data.Platform.students.get(child_id)
         if child:
             return child.view_grades()
         else:
             print("Child not found.")
 
     def view_child_assignments(self, child_id):
-        child = All_Users_Data.students.get(child_id)
+        child = All_Users_Data.Platform.students.get(child_id)
         if child:
             return child.assignments
         else:
             print("Child not found.")
 
     def receive_child_notification(self, child_id):
-        child = All_Users_Data.students.get(child_id)
+        child = All_Users_Data.Platform.students.get(child_id)
         if child:
             return child.view_notifications()
         else:

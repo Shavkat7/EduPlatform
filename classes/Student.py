@@ -22,7 +22,7 @@ class Student(User):
                 print("Assignment already submitted.")
             else:
                 self.assignments[assignment_id] = 'submitted'
-                All_Users_Data.assignments[assignment_id].add_submission(self._id, content)
+                All_Users_Data.Platform.assignments[assignment_id].add_submission(self._id, content)
                 print("Assignment submitted successfully.")
         else:
             print("Assignment not found.")

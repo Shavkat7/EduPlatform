@@ -17,7 +17,7 @@ class Teacher(User):
     def create_assignment(self, title, description, deadline, subject, class_id, difficulty="o'rta"):
         assignment = Assignment(title, description, deadline, subject, self._id, class_id, difficulty)
         self.assignments[assignment.id] = assignment
-        All_Users_Data.assignments[assignment.id] = assignment
+        All_Users_Data.Platform.assignments[assignment.id] = assignment
         print(f"Assignment {assignment.id} created successfully.")
 
     
@@ -26,7 +26,7 @@ class Teacher(User):
             assignment = self.assignments[assignment_id]
             assignment.set_grade(student_id, grade)
 
-            student = All_Users_Data.students[student_id]
+            student = All_Users_Data.Platform.students[student_id]
             if assignment.subject not in student.grades:
                 student.grades[assignment.subject] = []
             student.grades[assignment.subject].append(grade)
@@ -35,7 +35,7 @@ class Teacher(User):
             print("Assignment not found.")
         
     def view_student_progress(self, student_id):
-        student = All_Users_Data.students.get(student_id)
+        student = All_Users_Data.Platform.students.get(student_id)
         if student:
             return student.view_grades()
         else:

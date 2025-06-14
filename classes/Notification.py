@@ -22,7 +22,7 @@ class Notification:
         self.priority = priority
 
     def send(self):
-        recipient = All_Users_Data.users.get(self.recipient_id)
+        recipient = All_Users_Data.Platform.users.get(self.recipient_id)
         if recipient:
             recipient.add_notification(self.message)
             print(f"Notification sent to {recipient._full_name}.")
