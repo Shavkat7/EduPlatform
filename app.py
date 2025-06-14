@@ -41,6 +41,10 @@ def Admin_menu():
             print("Incorrect password! try again")
         print(f"Welcome {"Admin Full_Name"}. Logged in successfully!")
 
+    # else:
+    #   print("This username does not exist. Try Registering first!")
+    #   exit()
+
     print("1. Add User.")
     print("2. Remove User.")
     print("3. Generate report.")
@@ -119,3 +123,5 @@ def Parent_menu():
         case 2: Parent.view_child_grades()
 
         case 3: Parent.receive_child_notification()
+
+menu()
