@@ -34,15 +34,15 @@ def menu():
 
 def Admin_menu():
     print("Logging in as admin...")
-    username = input("Enter username: ")
+    full_name = input("Enter full_name: ")
     password = input("Enter password: ")
-    if username in Platform.admins:
-        while password != Platform.admins[username]:
+    if full_name in Platform.admins:
+        while password != Platform.admins[full_name]:
             print("Incorrect password! try again")
         print(f"Welcome {"Admin Full_Name"}. Logged in successfully!")
 
     # else:
-    #   print("This username does not exist. Try Registering first!")
+    #   print("This full_name does not exist. Try Registering first!")
     #   exit()
 
     print("1. Add User.")
@@ -61,10 +61,10 @@ def Admin_menu():
 
 def Teacher_menu():
     print("Logging in as teacher...")
-    username = input("Enter username: ")
+    full_name = input("Enter full_name: ")
     password = input("Enter password: ")
-    if username in Platform.teachers:
-        while password != Platform.teachers[username]:
+    if full_name in Platform.teachers:
+        while password != Platform.teachers[full_name]:
             print("Incorrect password! try again")
         print(f"Welcome {"Teacher Full_Name"}. Logged in successfully!")
 
@@ -84,10 +84,10 @@ def Teacher_menu():
 
 def Student_menu():
     print("Logging in as student...")
-    username = input("Enter username: ")
+    full_name = input("Enter full_name: ")
     password = input("Enter password: ")
-    if username in Platform.students:
-        while password != Platform.students[username]:
+    if full_name in Platform.students:
+        while password != Platform.students[full_name]:
             print("Incorrect password! try again")
         print(f"Welcome {"Student Full_Name"}. Logged in successfully!")
 
@@ -105,10 +105,10 @@ def Student_menu():
 
 def Parent_menu():
     print("Logging in as parent...")
-    username = input("Enter username: ")
+    full_name = input("Enter full_name: ")
     password = input("Enter password: ")
-    if username in Platform.parents:
-        while password != Platform.parents[username]:
+    if full_name in Platform.parents:
+        while password != Platform.parents[full_name]:
             print("Incorrect password! try again")
         print(f"Welcome {"Parent Full_Name"}. Logged in successfully!")
 
