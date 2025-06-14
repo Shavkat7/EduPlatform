@@ -1,6 +1,6 @@
-from classes.User import User
-
-
+from classes.User import User, UserRole
+from classes.Assignment import Assignment
+import All_Users_Data
 
 class Teacher(User):
     # Attributes specific to Teacher
@@ -8,35 +8,37 @@ class Teacher(User):
     classes: list
     assignments: dict  # Key: assignment ID, Value: Assignment
 
-    def __init__(self, id: int, full_name: str, email: str, password_hash: str, created_at: str, role: str):
-        super().__init__(id, full_name, email, password_hash, created_at, role)
-        self.subjects = {}
+    def __init__(self, full_name, email, password):
+        super().__init__(full_name, email, password, UserRole.TEACHER)
+        self.subjects = []
+        self.classes = []
         self.assignments = {}
 
-    def create_assignment(self, title, description, deadline, subject, class_id):
-        assignment_id = len(self.assignments) + 1
-        self.assignments[assignment_id] = {
-            "title": title,
-            "description": description,
-            "deadline": deadline,
-            "subject": subject,
-            "class_id": class_id,
-            # "status": "created"
-        }
-        return assignment_id
+    def create_assignment(self, title, description, deadline, subject, class_id, difficulty="o'rta"):
+        assignment = Assignment(title, description, deadline, subject, self._id, class_id, difficulty)
+        self.assignments[assignment.id] = assignment
+        All_Users_Data.assignments[assignment.id] = assignment
+        print(f"Assignment {assignment.id} created successfully.")
+
     
     def grade_assignment(self, assignment_id, student_id, grade):
-        if assignment_id not in self.assignments:
-            raise ValueError("Assignment ID does not exist.")
-        # Assuming there's a method to get the student by ID
-        student = self.get_student_by_id(student_id)
-        if not student:
-            raise ValueError("Student ID does not exist.")
-        # Assuming there's a method to record the grade for the student
-        student.record_grade(assignment_id, grade)
-        return True
+        if assignment_id in self.assignments:
+            assignment = self.assignments[assignment_id]
+            assignment.set_grade(student_id, grade)
+
+            student = All_Users_Data.students[student_id]
+            if assignment.subject not in student.grades:
+                student.grades[assignment.subject] = []
+            student.grades[assignment.subject].append(grade)
+            print(f"Grade {grade} set for student with {student_id} id, in assignment with {assignment_id} id.")
+        else:
+            print("Assignment not found.")
         
     def view_student_progress(self, student_id):
-        return self.get_student_by_id(student_id).grades
+        student = All_Users_Data.students.get(student_id)
+        if student:
+            return student.view_grades()
+        else:
+            print("Student not found.")
     
     

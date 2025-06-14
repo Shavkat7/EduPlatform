@@ -125,3 +125,4 @@ def Parent_menu():
         case 3: Parent.receive_child_notification()
 
 menu()
+
