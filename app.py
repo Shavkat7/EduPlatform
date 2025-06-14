@@ -36,7 +36,7 @@ def Admin_menu():
     print("Logging in as admin...")
     full_name = input("Enter full_name: ")
     password = input("Enter password: ")
-    if full_name in Platform.admins:
+    if full_name in Platform.admins.values():
         while password != Platform.admins[full_name]:
             print("Incorrect password! try again")
         print(f"Welcome {"Admin Full_Name"}. Logged in successfully!")
@@ -126,3 +126,4 @@ def Parent_menu():
 
 menu()
 
+a1 = Admin()
