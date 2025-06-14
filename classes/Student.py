@@ -1,5 +1,5 @@
 from classes.User import User, UserRole
-
+import All_Users_Data
 class Student(User):
 
     # Attributes specific to Student
@@ -16,10 +16,16 @@ class Student(User):
         self.assignments = {}
         self.grades = {}
 
-    def submit_assignment(self, assignment_id: int, content):
-        if assignment_id not in self.assignments:
-            raise ValueError("Assignment ID does not exist.")
-        self.assignments[assignment_id] = 'submitted'
+    def submit_assignment(self, assignment_id, content):
+        if assignment_id in self.assignments:
+            if self.assignments[assignment_id] == 'submitted':
+                print("Assignment already submitted.")
+            else:
+                self.assignments[assignment_id] = 'submitted'
+                All_Users_Data.assignments[assignment_id].add_submission(self._id, content)
+                print("Assignment submitted successfully.")
+        else:
+            print("Assignment not found.")
 
     def view_grades(self, subject: str = None):
         if subject:
@@ -38,5 +44,5 @@ class Student(User):
             else:
                 pass
                 # print(f"No grades available for {subject}.")
-        return (total_grades / count) if count > 0 else 0
+        return ("Average grade for all subjects ", total_grades / count) if count > 0 else 0
     
